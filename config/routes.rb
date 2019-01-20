@@ -5,4 +5,5 @@ Rails.application.routes.draw do
     resources :recipes
     resources :reviews, only: [:index]
   end
+  resources :recipes, only: [:index, :show]
 end
