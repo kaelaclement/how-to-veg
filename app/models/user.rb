@@ -6,6 +6,7 @@ class User < ApplicationRecord
   has_many :reviewed_recipes, through: :reviews, source: :recipe
 
   validates :email, presence: true
-  validates :email, uniqueness: true
+  validates :email, uniqueness: { case_sensitive: false }
+  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :password, presence: true
 end
