@@ -1,1 +1,33 @@
 <h1><%= @recipe.title %></h1>
+<h4>By: <%= link_to @recipe.author.name, user_path(@recipe.author) %></h4>
+<ul>
+<% @ingredients.each do |ingredient| %>
+  <li><%= ingredient %></li>
+<% end %>
+</ul>
+
+<p><%= @recipe.instructions %></p>
+
+<h3>Reviews for <%= @recipe.title %>:</h3>
+
+<p><strong><%= pluralize(@recipe.total_likes, "like") %></strong></p>
+
+<% @recipe.reviews.each do |review| %>
+  <p>
+  <% if review.comment %>
+  <%= link_to review.user.name, user_path(review.user) %><br>
+  <% end %>
+  <%= review.comment %></p>
+<% end %>
+
+<h4>Add A Review</h4>
+
+<%= form_with model: Review.new do |f| %>
+  <p><%= f.label :like %>: 
+  <%= f.check_box :like %></p>
+
+  <p><%= f.label :comment %><br>
+  <%= f.text_area :comment %></p>
+
+  <%= f.submit "Comment" %>
+<% end %>
