@@ -1,3 +1,14 @@
+<p>Oder by:</p>
+
+<%= form_tag(recipes_path, method: :get) do %>
+  <%= submit_tag ("Most Recent") %>
+<% end %>
+
+<%= form_tag(recipes_path, method: :get) do %>
+  <input type="hidden" name="search" value="popular">
+  <%= submit_tag ("Most Popular") %>
+<% end %>
+
 <% @recipes.each do |recipe| %>
   <p><%= link_to recipe.title, recipe_path(recipe) %></p>
 <% end %>
