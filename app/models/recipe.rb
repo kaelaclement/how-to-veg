@@ -18,4 +18,8 @@ class Recipe < ApplicationRecord
   def self.ordered_by_most_recent
     order(created_at: :desc)
   end
+
+  def total_likes
+    Review.where(recipe_id: id).sum(:like)
+  end
 end
