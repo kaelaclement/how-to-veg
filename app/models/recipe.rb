@@ -14,4 +14,8 @@ class Recipe < ApplicationRecord
     end
     most_liked  
   end
+
+  def self.ordered_by_most_recent
+    order(created_at: :desc)
+  end
 end
