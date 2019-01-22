@@ -4,7 +4,10 @@
   <p><%= flash[:alert] %></p>
 <% end %>
 
-<%= form_with model: User.new do |f| %>
+<%= form_with model: User.new, local: true do |f| %>
+  <p><%= f.label :name %>: 
+  <%= f.text_field :name %></p>
+  
   <p><%= f.label :email %>: 
   <%= f.text_field :email %></p>
 

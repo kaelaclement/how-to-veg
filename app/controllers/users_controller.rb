@@ -10,8 +10,8 @@ class UsersController < ApplicationController
       # or do I want a specific user homepage??
       redirect_to user_path(@user)
     else
-      flash[:alert] = "Please enter a valid email and password"
-      redirect_to new_user_path
+      flash[:alert] = "Please enter valid credentials"
+      render :new
     end
   end
 
@@ -22,6 +22,6 @@ class UsersController < ApplicationController
   private
 
     def user_params
-      params.require(:user).permit(:email, :password, :password_confirmation)
+      params.require(:user).permit(:name, :email, :password, :password_confirmation)
     end
 end
