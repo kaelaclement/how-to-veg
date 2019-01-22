@@ -9,4 +9,8 @@ class RecipesController < ApplicationController
       @recipes = Recipe.ordered_by_most_recent
     end
   end
+
+  def show
+    @recipe = Recipe.find_by(id: params[:id])
+  end
 end
