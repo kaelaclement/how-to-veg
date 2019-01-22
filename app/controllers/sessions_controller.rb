@@ -6,7 +6,6 @@ class SessionsController < ApplicationController
     @user = User.find_by(email: params[:email])
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
-      # or do I want a specific user homepage??
       redirect_to user_path(@user)
     else
       flash[:alert] = "Please check email and password and try again"

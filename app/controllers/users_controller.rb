@@ -7,7 +7,6 @@ class UsersController < ApplicationController
 
     if @user.save
       session[:user_id] = @user.id
-      # or do I want a specific user homepage??
       redirect_to user_path(@user)
     else
       flash[:alert] = "Please enter valid credentials"
