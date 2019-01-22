@@ -4,7 +4,7 @@ class RecipesController < ApplicationController
       @user = User.find_by(id: params[:user_id])
       @recipes = @user.authored_recipes      
     else
-      @recipes = Recipe.all
+      @recipes = Recipe.ordered_by_most_recent
     end
   end
 end
