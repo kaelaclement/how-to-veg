@@ -3,4 +3,4 @@
 <p><%= link_to "#{@user.name}'s recipes (#{@user.authored_recipes.count})", user_recipes_path(@user) %></p>
 <p><%= link_to "#{@user.name}'s reviews (#{@user.reviews.count})", user_reviews_path(@user) %></p>
 
-<%= link_to "Log Out", logout_path, method: "post" %>
+<%= log_out_button %>
