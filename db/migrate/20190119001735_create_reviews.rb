@@ -4,7 +4,7 @@ class CreateReviews < ActiveRecord::Migration[5.2]
       t.integer :user_id
       t.integer :recipe_id
       t.string :comment
-      t.integer :like
+      t.integer :like, default: 0
 
       t.timestamps
     end

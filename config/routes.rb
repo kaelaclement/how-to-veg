@@ -5,9 +5,10 @@ Rails.application.routes.draw do
     resources :recipes
     resources :reviews, only: [:index]
   end
-  resources :recipes, only: [:index, :show]
+  resources :recipes, only: [:index, :show] do
+    resources :reviews, only: [:create]
+  end
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   post '/logout', to: 'sessions#destroy'
-  post '/reviews', to: 'reviews#create'
 end

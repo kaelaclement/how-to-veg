@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 2019_01_19_001735) do
     t.integer "user_id"
     t.integer "recipe_id"
     t.string "comment"
-    t.integer "like"
+    t.integer "like", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
