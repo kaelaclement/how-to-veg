@@ -13,6 +13,11 @@ class ReviewsController < ApplicationController
     end
   end
 
+  def index
+    @user = User.find_by(id: params[:user_id])
+    @reviews = @user.reviews
+  end
+
   private
 
     def review_params
