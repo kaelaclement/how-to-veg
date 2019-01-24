@@ -14,4 +14,10 @@ class RecipesController < ApplicationController
     @recipe = Recipe.find_by(id: params[:id])
     @ingredients = @recipe.ingredients.split(",")
   end
+
+  def new
+  end
+
+  def create
+  end
 end
