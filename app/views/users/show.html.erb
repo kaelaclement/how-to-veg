@@ -1,6 +1,9 @@
 <h1><%= @user.name %></h1>
 
 <p><%= link_to "#{@user.name}'s recipes (#{@user.authored_recipes.count})", user_recipes_path(@user) %></p>
-<p><%= link_to "#{@user.name}'s reviews (#{@user.reviews.count})", user_reviews_path(@user) %></p>
+
+<% if @user == current_user %>
+  <p><%= link_to "Post new recipe", new_user_recipe_path(@user, Recipe.new) %></p>
+<% end %>
 
 <%= log_out_button %>
