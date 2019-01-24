@@ -22,4 +22,10 @@ class Recipe < ApplicationRecord
   def total_likes
     Review.where(recipe_id: id).sum(:like)
   end
+
+  def self.user_liked_recipes(user)
+    Review.user_liked_reviews(user).map do |review|
+      Recipe.where(id: review.recipe_id)
+    end
+  end
 end

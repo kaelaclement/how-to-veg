@@ -8,4 +8,8 @@ class Review < ApplicationRecord
   def self.most_liked_hash
     group(:recipe_id).order(:like).sum(:like)
   end
+
+  def self.user_liked_reviews(user)
+    where(user_id: user.id, like: 1)
+  end
 end
