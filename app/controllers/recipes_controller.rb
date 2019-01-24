@@ -23,5 +23,19 @@ class RecipesController < ApplicationController
   end
 
   def create
+    @user = User.find_by(id: params[:user_id])
+    @recipe = @user.authored_recipes.build(recipe_params)
+    if @recipe.save
+      redirect_to user_recipe_path(@user, @recipe)
+    else
+      flash[:alert] = "Please fill out all fields"
+      render :new
+    end
   end
+
+  private
+
+    def recipe_params
+      params.require(:recipe).permit(:title, :ingredients, :instructions)
+    end
 end
