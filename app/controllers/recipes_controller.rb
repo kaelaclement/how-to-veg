@@ -16,6 +16,10 @@ class RecipesController < ApplicationController
   end
 
   def new
+    @user = User.find_by(id: params[:user_id])
+    if !logged_in? || current_user != @user
+      redirect_to user_path(@user)
+    end
   end
 
   def create
