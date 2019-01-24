@@ -1,0 +1,17 @@
+<div><% if flash[:alert] %>
+  <%= flash[:alert] %>
+<% end %></div>
+
+<%= form_with url: user_recipes_path(@user), local: true do |f| %>
+  <p><%= f.label :title %><br>
+  <%= text_field_tag "recipe[title]" %></p>
+
+  <p>Please enter ingredients separated by commas<br>
+  (e.g. "1 cup diced onion, 1lb mushrooms, 1 red bell pepper...")<br>
+  <%= text_area_tag "recipe[ingredients]" %></p>
+
+  <p><%= f.label :instructions %><br>
+  <%= text_area_tag "recipe[instructions]" %></p>
+
+  <p><%= f.submit "Create Recipe" %></p>
+<% end %>
