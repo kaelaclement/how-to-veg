@@ -44,6 +44,9 @@ class RecipesController < ApplicationController
   end
 
   def update
+    @recipe = Recipe.find_by(id: params[:id])
+    @recipe.update(recipe_params)
+    redirect_to user_recipe_path(@recipe.author, @recipe)
   end
 
   def delete
