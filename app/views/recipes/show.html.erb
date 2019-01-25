@@ -1,5 +1,6 @@
 <h1><%= @recipe.title %></h1>
 <h4>By: <%= link_to @recipe.author.name, user_path(@recipe.author) %></h4>
+<h3>Ingredients</h3>
 <ul>
 <% @ingredients.each do |ingredient| %>
   <li><%= ingredient %></li>
@@ -7,6 +8,10 @@
 </ul>
 
 <p><%= @recipe.instructions %></p>
+
+<% if @recipe.author == current_user %>
+  <%= link_to "Edit this recipe", edit_user_recipe_path(@recipe.author, @recipe) %>
+<% end %>
 
 <h3>Reviews for <%= @recipe.title %>:</h3>
 
