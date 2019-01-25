@@ -33,6 +33,22 @@ class RecipesController < ApplicationController
     end
   end
 
+  def edit
+    @user = User.find_by(id: params[:user_id])
+    if @user == current_user
+      @recipe = @user.authored_recipes.find_by(id: params[:id])
+    else
+      @recipe = Recipe.find_by(id: params[:id])
+      redirect_to user_recipe_path(@user, @recipe)
+    end
+  end
+
+  def update
+  end
+
+  def delete
+  end
+
   private
 
     def recipe_params
