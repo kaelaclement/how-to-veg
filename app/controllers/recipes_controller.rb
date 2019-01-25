@@ -49,7 +49,10 @@ class RecipesController < ApplicationController
     redirect_to user_recipe_path(@recipe.author, @recipe)
   end
 
-  def delete
+  def destroy
+    @user = User.find_by(id: params[:user_id])
+    @user.authored_recipes.find_by(id: params[:id]).delete
+    redirect_to user_recipes_path(@user)
   end
 
   private
