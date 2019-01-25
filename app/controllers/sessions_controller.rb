@@ -3,13 +3,24 @@ class SessionsController < ApplicationController
   end
 
   def create
-    @user = User.find_by(email: params[:email])
-    if @user && @user.authenticate(params[:password])
-      session[:user_id] = @user.id
-      redirect_to user_path(@user)
+    if auth
+      if user = User.find_by(email: auth['info']['email'])
+        session[:user_id] = user.id
+        redirect_to recipes_path
+      else
+        user = User.create(name: auth['info']['name'], email: auth['info']['email'], password: SecureRandom.hex)
+        session[:user_id] = user.id
+        redirect_to recipes_path
+      end
     else
-      flash[:alert] = "Please check email and password and try again"
-      redirect_to login_path
+      @user = User.find_by(email: params[:email])
+      if @user && @user.authenticate(params[:password])
+        session[:user_id] = @user.id
+        redirect_to user_path(@user)
+      else
+        flash[:alert] = "Please check email and password and try again"
+        redirect_to login_path
+      end
     end
   end
 
@@ -17,4 +28,9 @@ class SessionsController < ApplicationController
     session.delete :user_id
     redirect_to root_path
   end
+
+  private
+    def auth
+      request.env["omniauth.auth"]
+    end
 end
