@@ -17,3 +17,5 @@
 
   <p><%= f.submit "Edit Recipe" %></p>
 <% end %>
+
+<%= link_to "Delete Recipe", user_recipe_path(@user, @recipe), method: :delete %>
