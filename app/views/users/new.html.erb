@@ -1,20 +1,30 @@
 <h1>Sign Up</h1>
 
-<% if flash[:alert] %>
-  <p><%= flash[:alert] %></p>
+<%= form_for @user do |f| %>
+  <% if @user.errors.any? %>
+  <div id="error_explanation">
+    <h4>
+      Sign Up not completed
+    </h4>
+ 
+    <ul>
+    <% @user.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
 <% end %>
 
-<%= form_with model: User.new, local: true do |f| %>
-  <p><%= f.label :name %>: 
+  <p><%= f.label :name %>
   <%= f.text_field :name %></p>
   
-  <p><%= f.label :email %>: 
+  <p><%= f.label :email %>
   <%= f.text_field :email %></p>
 
-  <p><%= f.label :password %>: 
+  <p><%= f.label :password %>
   <%= f.password_field :password %></p>
 
-  <p><%= f.label :password_confirmation %>: 
+  <p><%= f.label :password_confirmation %>
   <%= f.password_field :password_confirmation %></p>
 
   <p><%= f.submit "Sign Up" %></p>
