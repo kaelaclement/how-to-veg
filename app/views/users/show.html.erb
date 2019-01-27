@@ -5,5 +5,3 @@
 <% if @user == current_user %>
   <p><%= link_to "Post new recipe", new_user_recipe_path(@user, Recipe.new) %></p>
 <% end %>
-
-<%= log_out_button %>
