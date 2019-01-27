@@ -1,0 +1,27 @@
+<%= form_for [@user, @recipe] do |f| %>
+  <% if @recipe.errors.any? %>
+  <div id="error_explanation">
+    <h4>
+      Could not save recipe:
+    </h4>
+ 
+    <ul>
+    <% @recipe.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+  <p><%= f.label :title %><br>
+  <%= f.text_field :title %></p>
+
+  <p>Please enter ingredients separated by commas<br>
+  (e.g. "1 cup diced onion, 1lb mushrooms, 1 red bell pepper...")<br>
+  <%= f.text_area :ingredients %></p>
+
+  <p><%= f.label :instructions %><br>
+  <%= f.text_area :instructions %></p>
+
+  <p><%= f.submit %></p>
+<% end %>

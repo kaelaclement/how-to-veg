@@ -19,6 +19,8 @@ class RecipesController < ApplicationController
     @user = User.find_by(id: params[:user_id])
     if !logged_in? || current_user != @user
       redirect_to user_path(@user)
+    else
+      @recipe = Recipe.new
     end
   end
 
@@ -28,7 +30,6 @@ class RecipesController < ApplicationController
     if @recipe.save
       redirect_to user_recipe_path(@user, @recipe)
     else
-      flash[:alert] = "Please fill out all fields"
       render :new
     end
   end
@@ -45,8 +46,12 @@ class RecipesController < ApplicationController
 
   def update
     @recipe = Recipe.find_by(id: params[:id])
-    @recipe.update(recipe_params)
-    redirect_to user_recipe_path(@recipe.author, @recipe)
+    if @recipe.update(recipe_params)
+      redirect_to user_recipe_path(@recipe.author, @recipe)
+    else
+      @user = @recipe.author
+      render :edit
+    end
   end
 
   def destroy
