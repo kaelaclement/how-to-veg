@@ -1,5 +1,9 @@
 <h1>Log In</h1>
 
+<%= link_to('Log In with Facebook', '/auth/facebook') %>
+
+<p>or if you have an account and password:</p>
+
 <% if flash[:alert] %>
   <p><%= flash[:alert] %></p>
 <% end %>

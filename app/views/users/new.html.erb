@@ -1,5 +1,9 @@
 <h1>Sign Up</h1>
 
+<%= link_to('Sign Up with Facebook', '/auth/facebook') %>
+
+<p>or create an account:</p>
+
 <%= form_for @user do |f| %>
   <% if @user.errors.any? %>
   <div id="error_explanation">
