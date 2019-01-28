@@ -9,9 +9,7 @@
 
 <p><%= @recipe.instructions %></p>
 
-<% if @recipe.author == current_user %>
-  <%= link_to "Edit this recipe", edit_user_recipe_path(@recipe.author, @recipe) %>
-<% end %>
+<%= edit_if_author %>
 
 <h3>Reviews for <%= @recipe.title %>:</h3>
 
