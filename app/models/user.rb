@@ -9,4 +9,8 @@ class User < ApplicationRecord
   validates :email, uniqueness: { case_sensitive: false }
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :name, presence: true
+
+  def liked_recipes
+    Recipe.user_liked_recipes(self).flatten
+  end
 end

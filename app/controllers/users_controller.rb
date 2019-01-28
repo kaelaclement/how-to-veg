@@ -18,6 +18,11 @@ class UsersController < ApplicationController
     @user = User.find_by(id: params[:id])
   end
 
+  def liked_recipes
+    @user = User.find_by(id: params[:user_id])
+    @recipes = @user.liked_recipes
+  end
+
   private
 
     def user_params
