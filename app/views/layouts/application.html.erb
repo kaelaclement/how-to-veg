@@ -10,10 +10,15 @@
   </head>
 
   <body>
+    <header>
+      <h1>How To Veg</h1>
+      <p>Easy, delicious, vegetarian.</p>
+    </header>
     <div class="navigation">
+      Go to:
       <%= link_to "Recipes", recipes_url %>
       <% if session[:user_id] %>
-        <%= link_to "#{current_user.name}'s Profile", user_url(current_user) %>
+        <%= link_to "Profile", user_url(current_user) %>
         <%= link_to "Log Out", logout_url, method: "post" %>
       <% else %>
         <%= link_to "Sign Up", new_user_url %>
