@@ -19,7 +19,7 @@ class RecipesController < ApplicationController
 
   def new
     @user = User.find_by(id: params[:user_id])
-    if !logged_in? || current_user != @user
+    if @user != current_user
       redirect_to user_path(@user)
     else
       @recipe = Recipe.new
@@ -28,11 +28,15 @@ class RecipesController < ApplicationController
 
   def create
     @user = User.find_by(id: params[:user_id])
-    @recipe = @user.authored_recipes.build(recipe_params)
-    if @recipe.save
-      redirect_to user_recipe_path(@user, @recipe)
+    if @user == current_user
+      @recipe = @user.authored_recipes.build(recipe_params)
+      if @recipe.save
+        redirect_to user_recipe_path(@user, @recipe)
+      else
+        render :new
+      end
     else
-      render :new
+      redirect_to root_path
     end
   end
 
@@ -58,8 +62,12 @@ class RecipesController < ApplicationController
 
   def destroy
     @user = User.find_by(id: params[:user_id])
-    @user.authored_recipes.find_by(id: params[:id]).delete
-    redirect_to user_recipes_path(@user)
+    if @user == current_user
+      @user.authored_recipes.find_by(id: params[:id]).delete
+      redirect_to user_recipes_path(@user)
+    else
+      redirect_to root_path
+    end
   end
 
   private
