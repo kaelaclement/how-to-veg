@@ -14,5 +14,6 @@
 <% end %>
 
 <% @recipes.each do |recipe| %>
-  <p><%= link_to recipe.title, recipe_path(recipe) %></p>
+  <p><%= link_to recipe.title, recipe_path(recipe) %><br>
+  by <%= link_to recipe.author.name, user_path(recipe.author) %></p>
 <% end %>
