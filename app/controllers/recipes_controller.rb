@@ -5,7 +5,9 @@ class RecipesController < ApplicationController
       @recipes = @user.authored_recipes.ordered_by_most_recent     
     elsif params[:search] == "popular"
       @recipes = Recipe.ordered_by_likes
+      @button = "recent"
     else
+      @button = "popular"
       @recipes = Recipe.ordered_by_most_recent
     end
   end

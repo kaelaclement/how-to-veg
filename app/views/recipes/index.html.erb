@@ -1,12 +1,16 @@
-<p>Order by:</p>
+<h1><%= user_recipes %></h1>
 
-<%= form_tag(recipes_path, method: :get) do %>
-  <%= submit_tag ("Most Recent") %>
-<% end %>
-
-<%= form_tag(recipes_path, method: :get) do %>
-  <input type="hidden" name="search" value="popular">
-  <%= submit_tag ("Most Popular") %>
+<% if @button == "recent" %>
+  <p>Showing most popular.</p>
+  <%= form_tag(recipes_path, method: :get) do %>
+    <%= submit_tag ("Order by most recent") %>
+  <% end %>
+<% elsif @button == "popular" %>
+  <p>Showing most recent.</p>
+  <%= form_tag(recipes_path, method: :get) do %>
+    <input type="hidden" name="search" value="popular">
+    <%= submit_tag ("Order by most popular") %>
+  <% end %>
 <% end %>
 
 <% @recipes.each do |recipe| %>
