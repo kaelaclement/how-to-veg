@@ -25,8 +25,8 @@
   <%= review.comment %></p>
 <% end %>
 
-<% if logged_in? %>
+<% if logged_in? && current_user != @recipe.author %>
   <%= render "review" %>
-<% else %>
+<% elsif !logged_in? %>
   <h4>Log in or sign up to leave a review!</h4>
 <% end %>
