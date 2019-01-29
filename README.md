@@ -1,24 +1,17 @@
-# README
+# How To Veg
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Description
 
-Things you may want to cover:
+How To Veg is a web app for simple and delicious vegetarian recipes.
 
-* Ruby version
+## Usage
 
-* System dependencies
+To use simply clone this repo and run `rails start`
 
-* Configuration
+## Contributing
 
-* Database creation
+For bug fixes and new features, fork and clone this repo then submit a pull request for consideration.
 
-* Database initialization
+## License
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+How To Veg covered under the [MIT license](./LICENSE).
