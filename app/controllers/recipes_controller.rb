@@ -19,7 +19,9 @@ class RecipesController < ApplicationController
 
   def new
     @user = User.find_by(id: params[:user_id])
-    if @user != current_user
+    if !@user
+      redirect_to root_path
+    elsif @user != current_user
       redirect_to user_path(@user)
     else
       @recipe = Recipe.new
@@ -42,7 +44,9 @@ class RecipesController < ApplicationController
 
   def edit
     @user = User.find_by(id: params[:user_id])
-    if @user == current_user
+    if !@user
+      redirect_to root_path
+    elsif @user == current_user
       @recipe = @user.authored_recipes.find_by(id: params[:id])
     else
       @recipe = Recipe.find_by(id: params[:id])
