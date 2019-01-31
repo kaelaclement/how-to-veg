@@ -1,4 +1,6 @@
 class RecipesController < ApplicationController
+  before_action :get_user, only: [:new, :create, :edit, :destroy]
+
   def index
     if params[:user_id]
       @user = User.find_by(id: params[:user_id])
@@ -18,7 +20,6 @@ class RecipesController < ApplicationController
   end
 
   def new
-    @user = User.find_by(id: params[:user_id])
     if !@user
       redirect_to root_path
     elsif @user != current_user
@@ -29,7 +30,6 @@ class RecipesController < ApplicationController
   end
 
   def create
-    @user = User.find_by(id: params[:user_id])
     if @user == current_user
       @recipe = @user.authored_recipes.build(recipe_params)
       if @recipe.save
@@ -43,7 +43,6 @@ class RecipesController < ApplicationController
   end
 
   def edit
-    @user = User.find_by(id: params[:user_id])
     if !@user
       redirect_to root_path
     elsif @user == current_user
@@ -65,7 +64,6 @@ class RecipesController < ApplicationController
   end
 
   def destroy
-    @user = User.find_by(id: params[:user_id])
     if @user == current_user
       @user.authored_recipes.find_by(id: params[:id]).delete
       redirect_to user_recipes_path(@user)
@@ -78,5 +76,9 @@ class RecipesController < ApplicationController
 
     def recipe_params
       params.require(:recipe).permit(:title, :ingredients, :instructions)
+    end
+
+    def get_user
+      @user = User.find_by(id: params[:user_id])
     end
 end
