@@ -28,4 +28,8 @@ class Recipe < ApplicationRecord
       Recipe.where(id: review.recipe_id)
     end
   end
+
+  def self.find_in_title(search)
+    Recipe.where("title LIKE ?", "%#{search}%")
+  end
 end

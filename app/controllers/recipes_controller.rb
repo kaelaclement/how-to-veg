@@ -9,7 +9,9 @@ class RecipesController < ApplicationController
       else
         redirect_to root_path
       end
-    elsif params[:search] == "popular"
+    elsif params[:search]
+      @recipes = Recipe.find_in_title(params[:search])
+    elsif params[:order] == "popular"
       @recipes = Recipe.ordered_by_likes
       @button = "recent"
     else
