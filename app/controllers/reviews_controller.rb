@@ -1,8 +1,7 @@
 class ReviewsController < ApplicationController
   def create
-    review = Review.new(review_params)
     @recipe = Recipe.find_by(id: params[:recipe_id])
-    review.user = current_user
+    review = current_user.reviews.build(review_params)
     review.recipe = @recipe
 
     if review.save
