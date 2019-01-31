@@ -4,7 +4,11 @@ class RecipesController < ApplicationController
   def index
     if params[:user_id]
       @user = User.find_by(id: params[:user_id])
-      @recipes = @user.authored_recipes.ordered_by_most_recent     
+      if @user
+        @recipes = @user.authored_recipes.ordered_by_most_recent
+      else
+        redirect_to root_path
+      end
     elsif params[:search] == "popular"
       @recipes = Recipe.ordered_by_likes
       @button = "recent"
