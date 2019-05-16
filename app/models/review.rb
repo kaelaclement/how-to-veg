@@ -6,12 +6,8 @@ class Review < ApplicationRecord
   validates :like, inclusion: { in: [1, 0] }
 
   def self.most_liked_hash
-    group(:recipe_id).order(:like).sum(:like)
+    group(:recipe_id).sum(:like).sort_by { | k, v | v }.to_h
   end
-
-  # most_liked_hash.sort_by {|k, v| v}
-  # returns sorted array
-  # array to hash?
 
   def self.user_liked_reviews(user)
     where(user_id: user.id, like: 1)
