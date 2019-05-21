@@ -18,11 +18,14 @@ class RecipesController < ApplicationController
       @button = "popular"
       @recipes = Recipe.ordered_by_most_recent
     end
+    render json: @recipes
   end
 
   def show
     @recipe = Recipe.find_by(id: params[:id])
     @ingredients = @recipe.ingredients.split(",")
+
+    render json: @recipe
   end
 
   def new
