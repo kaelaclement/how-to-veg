@@ -6,6 +6,7 @@ class RecipesController < ApplicationController
       @user = User.find_by(id: params[:user_id])
       if @user
         @recipes = @user.authored_recipes.ordered_by_most_recent
+        render json: @recipes
       else
         redirect_to root_path
       end
@@ -18,7 +19,6 @@ class RecipesController < ApplicationController
       @button = "popular"
       @recipes = Recipe.ordered_by_most_recent
     end
-    render json: @recipes
   end
 
   def show
