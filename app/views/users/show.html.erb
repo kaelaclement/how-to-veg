@@ -1,10 +1,9 @@
 <h1><%= @user.name %></h1>
 
-<div id="userRecipes">
-
 <button id="getRecipes" data-user-id="<%= @user.id %>"><%= @user.name %>'s recipes (<%= @user.authored_recipes.count %>)</button>
 
-</div>
+<div id="userRecipes"></div>
+
 <p><%= link_to "#{@user.name}'s liked recipes", "/users/#{@user.id}/liked_recipes" %>
 
 <% if @user == current_user %>
