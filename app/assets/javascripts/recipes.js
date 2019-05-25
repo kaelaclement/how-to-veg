@@ -7,7 +7,7 @@ function getUserRecipes() {
   const userId = $('button#getRecipes').attr('data-user-id');
   $.getJSON(`/users/${userId}/recipes`, function(data) {
     data.forEach(r => {
-      let recipe = new Recipe(r.title)
+      let recipe = new Recipe(r)
       let recipeHtml = recipe.recipeLink()
       $('div#userRecipes').append(recipeHtml)
     });
@@ -15,12 +15,22 @@ function getUserRecipes() {
 };
 
 class Recipe {
-  constructor(title) {
-    this.title = title;
+  constructor(recipe) {
+    this.title = recipe.title;
+    this.ingredients = recipe.ingredients.split(', ');
+    this.instructions = recipe.instructions;
   };
 
   recipeLink() {
-    return `<p><a href=#>${this.title}</a></p>`
+    return `<p><a href=#>${this.title}</a></p>`;
+  };
+
+  ingredientsList() {
+    
+  };
+
+  recipeShow() {
+    
   };
 };
 
