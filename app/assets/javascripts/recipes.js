@@ -8,7 +8,8 @@ function getUserRecipes() {
   $.getJSON(`/users/${userId}/recipes`, function(data) {
     data.forEach(r => {
       let recipe = new Recipe(r)
-      let recipeHtml = recipe.recipeLink()
+      debugger
+      let recipeHtml = recipe.recipeLinkHtml()
       $('div#userRecipes').append(recipeHtml)
     });
   });
@@ -21,15 +22,17 @@ class Recipe {
     this.instructions = recipe.instructions;
   };
 
-  recipeLink() {
+  recipeLinkHtml() {
     return `<p><a href=#>${this.title}</a></p>`;
   };
 
-  ingredientsList() {
-    
+  ingredientsListHtml() {
+    let ingredientsHtml = this.ingredients.map(i => {return `<li>${i}</li>`});
+    let listHtml = `<ul>${ingredientsHtml}</ul>`;
+    return listHtml;
   };
 
-  recipeShow() {
+  recipeShowHtml() {
     
   };
 };
