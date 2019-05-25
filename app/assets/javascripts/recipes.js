@@ -33,7 +33,12 @@ class Recipe {
   };
 
   recipeShowHtml() {
-    
+    let recipeHtml = `
+    <h1>${this.title}</h1>
+    ${this.ingredientsListHtml()}
+    <p>${this.instructions}</p>
+    `
+    return recipeHtml;
   };
 };
 
