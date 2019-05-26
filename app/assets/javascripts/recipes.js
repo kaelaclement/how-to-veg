@@ -1,5 +1,27 @@
-const attachListeners = () => {
-  $('button#getRecipes').click(getUserRecipes);
+class Recipe {
+  constructor(recipe) {
+    this.id = recipe.id;
+    this.title = recipe.title;
+    this.ingredients = recipe.ingredients.split(', ');
+    this.instructions = recipe.instructions;
+  };
+  
+  recipeLinkHtml() {
+    return `<p><a id="recipeLink" data-recipe-id="${this.id}" href="/recipes/${this.id}">${this.title}</a></p>`;
+  };
+  
+  recipeShowHtml() {
+    let recipeHtml = `
+    <h1>${this.title}</h1>
+    <ul>`
+
+    this.ingredients.forEach(i => {recipeHtml += `<li>${i}</li>`})
+
+    recipeHtml += `</ul>
+    <p>${this.instructions}</p>
+    `
+    return recipeHtml;
+  };
 };
 
 function getUserRecipes() {
@@ -14,34 +36,15 @@ function getUserRecipes() {
   });
 };
 
-class Recipe {
-  constructor(recipe) {
-    this.id = recipe.id;
-    this.title = recipe.title;
-    this.ingredients = recipe.ingredients.split(', ');
-    this.instructions = recipe.instructions;
-  };
-
-  recipeLinkHtml() {
-    return `<p><a data-recipe-id="${this.id}" href=#>${this.title}</a></p>`;
-  };
-
-  ingredientsListHtml() {
-    let ingredientsHtml = this.ingredients.map(i => {return `<li>${i}</li>`});
-    let listHtml = `<ul>${ingredientsHtml}</ul>`;
-    return listHtml;
-  };
-
-  recipeShowHtml() {
-    let recipeHtml = `
-    <h1>${this.title}</h1>
-    ${this.ingredientsListHtml()}
-    <p>${this.instructions}</p>
-    `
-    return recipeHtml;
-  };
-};
-
 $(function() {
-  attachListeners();
+  $('button#getRecipes').click(getUserRecipes);
+
+  $(document).on('click', 'a#recipeLink', function(e) {
+    e.preventDefault();
+    $('div#userRecipe').html('');
+    $.getJSON(e.currentTarget.href, function(data) {
+      let recipe = new Recipe(data);
+      $('div#userRecipe').append(recipe.recipeShowHtml());
+    });
+  });
 });
