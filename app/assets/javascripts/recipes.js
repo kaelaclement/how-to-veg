@@ -4,6 +4,7 @@ class Recipe {
     this.title = recipe.title;
     this.ingredients = recipe.ingredients.split(', ');
     this.instructions = recipe.instructions;
+    this.reviews = recipe.reviews.reverse();
   };
   
   recipeLinkHtml() {
@@ -22,6 +23,18 @@ class Recipe {
     `
     return recipeHtml;
   };
+
+  reviewsHtml() {
+    let reviewsHtml = "<h3>Comments</h3>";
+    this.reviews.forEach(review => {
+      if(review.comment) {
+        reviewsHtml += 
+        `<p>By: ${review.user_name}</p>
+        <p>Comment: ${review.comment}</p>`
+      }
+    });
+    return reviewsHtml;
+  };
 };
 
 function getUserRecipes() {
@@ -32,6 +45,7 @@ function getUserRecipes() {
       let recipe = new Recipe(r)
       let recipeHtml = recipe.recipeLinkHtml()
       $('div#userRecipes').append(recipeHtml)
+
     });
   });
 };
@@ -42,9 +56,11 @@ $(function() {
   $(document).on('click', 'a#recipeLink', function(e) {
     e.preventDefault();
     $('div#userRecipe').html('');
+    $('div#recipeReviews').html('');
     $.getJSON(e.currentTarget.href, function(data) {
       let recipe = new Recipe(data);
       $('div#userRecipe').append(recipe.recipeShowHtml());
+      $('div#recipeReviews').append(recipe.reviewsHtml());
     });
   });
 });
