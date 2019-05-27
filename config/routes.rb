@@ -12,4 +12,5 @@ Rails.application.routes.draw do
   post '/logout', to: 'sessions#destroy'
   get '/auth/facebook/callback', to: 'sessions#create'
   get '/users/:user_id/liked_recipes', to: 'users#liked_recipes'
+  get '/recipes/:recipe_id/reviews/new', to: 'reviews#new'
 end
