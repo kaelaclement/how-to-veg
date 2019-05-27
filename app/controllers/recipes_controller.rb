@@ -6,7 +6,10 @@ class RecipesController < ApplicationController
       @user = User.find_by(id: params[:user_id])
       if @user
         @recipes = @user.authored_recipes.ordered_by_most_recent
-        render json: @recipes
+        respond_to do |f|
+          f.html
+          f.json {render json: @recipes}
+        end
       else
         redirect_to root_path
       end
@@ -25,7 +28,10 @@ class RecipesController < ApplicationController
     @recipe = Recipe.find_by(id: params[:id])
     @ingredients = @recipe.ingredients.split(",")
 
-    render json: @recipe
+    respond_to do |f|
+      f.html
+      f.json { render json: @recipe }
+    end    
   end
 
   def new
