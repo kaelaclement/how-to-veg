@@ -25,7 +25,8 @@ class Recipe {
   };
 
   reviewsHtml() {
-    let reviewsHtml = "<h3>Reviews</h3>";
+    $('h3#reviewsHeadline').html('Reviews')
+    let reviewsHtml = '';
     this.reviews.forEach(review => {
       if(review.comment) {
         reviewsHtml += 
@@ -37,7 +38,7 @@ class Recipe {
   };
 };
 
-function getUserRecipes() {
+const getUserRecipes = () => {
   $('div#userRecipes').html('');
   const userId = $('button#getRecipes').attr('data-user-id');
   $.getJSON(`/users/${userId}/recipes`, function(data) {
@@ -47,6 +48,15 @@ function getUserRecipes() {
       $('div#userRecipes').append(recipeHtml)
     });
   });
+};
+
+const newReviewHtml = review => {
+  if(review.comment) {
+    return `
+    <p>By: ${review.user_name}</p>
+    <p>Comment: ${review.comment}</p>
+    `
+  }
 };
 
 $(function() {
@@ -59,7 +69,7 @@ $(function() {
     $.getJSON(e.currentTarget.href, function(data) {
       let recipe = new Recipe(data);
       $('div#userRecipe').append(recipe.recipeShowHtml());
-      $('div#newReview').append(`<button id="newReview">Leave A Review</button>`)
+      $('div#newReview').append(`<button id="newReview">Leave A Review</button>`);
       $('div#recipeReviews').append(recipe.reviewsHtml());
     });
   });
@@ -78,7 +88,7 @@ $(function() {
     const postURL = $(this)[0]["action"]
     $.post(postURL, reviewParams)
     .done(function(data) {
-      console.log(data);
+      $('div#recipeReviews').prepend(newReviewHtml(data));
     })
-  })
+  });
 });
