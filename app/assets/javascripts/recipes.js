@@ -25,7 +25,7 @@ class Recipe {
   };
 
   reviewsHtml() {
-    let reviewsHtml = "<h3>Comments</h3>";
+    let reviewsHtml = "<h3>Reviews</h3>";
     this.reviews.forEach(review => {
       if(review.comment) {
         reviewsHtml += 
@@ -59,24 +59,24 @@ $(function() {
     $.getJSON(e.currentTarget.href, function(data) {
       let recipe = new Recipe(data);
       $('div#userRecipe').append(recipe.recipeShowHtml());
-      $('div#newComment').append(`<button id="newReview">Leave A Review</button>`)
+      $('div#newReview').append(`<button id="newReview">Leave A Review</button>`)
       $('div#recipeReviews').append(recipe.reviewsHtml());
     });
   });
 
   $(document).on('click', 'button#newReview', function(e) {
-    $('div#newComment').html('');
+    $('div#newReview').html('');
     let recipeId = $('h1#recipe').attr('data-recipe-id');
     $.get(`/recipes/${recipeId}/reviews/new`, function(data) {
-      $('div#newComment').append(data);
+      $('div#newReview').append(data);
     });
   });
 
-  $(document).on('submit', 'form#commentForm', function(e){
+  $(document).on('submit', 'form#reviewForm', function(e){
     e.preventDefault();
-    const commentParams = $(this).serialize();
+    const reviewParams = $(this).serialize();
     const postURL = $(this)[0]["action"]
-    $.post(postURL, commentParams)
+    $.post(postURL, reviewParams)
     .done(function(data) {
       console.log(data);
     })
