@@ -13,7 +13,7 @@ class Recipe {
   
   recipeShowHtml() {
     let recipeHtml = `
-    <h1>${this.title}</h1>
+    <h1 id="recipe" data-recipe-id="${this.id}">${this.title}</h1>
     <ul>`
 
     this.ingredients.forEach(i => {recipeHtml += `<li>${i}</li>`})
@@ -45,7 +45,6 @@ function getUserRecipes() {
       let recipe = new Recipe(r)
       let recipeHtml = recipe.recipeLinkHtml()
       $('div#userRecipes').append(recipeHtml)
-
     });
   });
 };
@@ -60,7 +59,26 @@ $(function() {
     $.getJSON(e.currentTarget.href, function(data) {
       let recipe = new Recipe(data);
       $('div#userRecipe').append(recipe.recipeShowHtml());
+      $('div#newComment').append(`<button id="newReview">Leave A Review</button>`)
       $('div#recipeReviews').append(recipe.reviewsHtml());
     });
   });
+
+  $(document).on('click', 'button#newReview', function(e) {
+    $('div#newComment').html('');
+    let recipeId = $('h1#recipe').attr('data-recipe-id');
+    $.get(`/recipes/${recipeId}/reviews/new`, function(data) {
+      $('div#newComment').append(data);
+    });
+  });
+
+  $(document).on('submit', 'form#commentForm', function(e){
+    e.preventDefault();
+    const commentParams = $(this).serialize();
+    const postURL = $(this)[0]["action"]
+    $.post(postURL, commentParams)
+    .done(function(data) {
+      console.log(data);
+    })
+  })
 });
