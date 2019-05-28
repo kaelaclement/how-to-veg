@@ -66,6 +66,7 @@ $(function() {
     e.preventDefault();
     $('div#userRecipe').html('');
     $('div#recipeReviews').html('');
+    $('div#newReview').html('');
     $.getJSON(e.currentTarget.href, function(data) {
       let recipe = new Recipe(data);
       $('div#userRecipe').append(recipe.recipeShowHtml());
@@ -88,6 +89,7 @@ $(function() {
     const postURL = $(this)[0]["action"]
     $.post(postURL, reviewParams)
     .done(function(data) {
+      $('div#newReview').html('<h5>Review Posted!</h5>');
       $('div#recipeReviews').prepend(newReviewHtml(data));
     })
   });
