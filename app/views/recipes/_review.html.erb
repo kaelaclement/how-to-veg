@@ -1,6 +1,6 @@
 <h4>Add A Review</h4>
 
-<%= form_with url: recipe_reviews_path(@recipe), local: true do |f| %>
+<%= form_with url: recipe_reviews_path(@recipe), id:"commentForm", local: true do |f| %>
   <p><%= f.label :like %>: 
   <%= check_box_tag 'review[like]'%></p>
 
