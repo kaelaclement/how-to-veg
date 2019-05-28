@@ -5,10 +5,10 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-kaela = User.create(name: "Kaela", email: "kaela@howtoveg.com", password: "test")
-lorna = User.create(name: "Lorna", email: "lorna@howtoveg.com", password: "test")
-rhiannon = User.create(name: "Rhiannon", email: "rhiannon@howtoveg.com", password: "test")
-kate = User.create(name: "Kate", email: "kate@howtoveg.com", password: "test")
+kaela = User.create(name: "Kaela", email: "kaela@howtoveg.com", password: "password")
+lorna = User.create(name: "Lorna", email: "lorna@howtoveg.com", password: "password")
+rhiannon = User.create(name: "Rhiannon", email: "rhiannon@howtoveg.com", password: "password")
+kate = User.create(name: "Kate", email: "kate@howtoveg.com", password: "password")
 
 kaelas_recipe = Recipe.create(author: kaela, title: "shakshouka", ingredients: "shakshouka stuff", instructions: "make it")
 kaelas_recipe2 = Recipe.create(author: kaela, title: "philly not-cheesesteak", ingredients: "1 green bell pepper, 1 portobello mushroom, 2 cloves garlic, 1 T butter, 1/2 onion, cheese and bread of choice", instructions: "sautee veggies and add cheese.")
