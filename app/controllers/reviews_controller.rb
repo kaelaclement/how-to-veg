@@ -6,9 +6,12 @@ class ReviewsController < ApplicationController
   end
 
   def create
-    recipe = Recipe.find_by(id: params[:recipe_id])
-    @review = current_user.reviews.create(review_params)
-    render json: @review
+    @review = current_user.reviews.build(review_params)
+    @review.recipe = Recipe.find_by(id: params[:recipe_id])
+
+    if @review.save
+      render json: @review
+    end
   end
 
   private
