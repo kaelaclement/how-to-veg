@@ -1,7 +1,8 @@
 <h1><%= @user.name %></h1>
 
 <button id="getRecipes" data-user-id="<%= @user.id %>"><%= @user.name %>'s recipes (<%= @user.authored_recipes.count %>)</button>
-
+<br>
+<button id="alphabetizedRecipes" data-user-id="<%= @user.id %>">Sort by alphabetical order</button>
 <div id="userRecipes"></div>
 <div id="userRecipe"></div>
 <div id="newReview"></div>

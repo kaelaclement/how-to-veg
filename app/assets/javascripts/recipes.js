@@ -50,6 +50,29 @@ const getUserRecipes = () => {
   });
 };
 
+const alphabetizeUserRecipes = () => {
+  $('div#userRecipes').html('');
+  const userId = $('button#alphabetizedRecipes').attr('data-user-id');
+  $.getJSON(`/users/${userId}/recipes`, function(data) {
+    data.sort(function(a,b){
+      let title1 = a.title.toLowerCase();
+      let title2 = b.title.toLowerCase();
+      if(title1 < title2) {
+          return -1;
+      } else if(title2 > title1) {
+          return 1;
+      } else {
+          return 0;
+      }
+  })
+    data.forEach(r => {
+      let recipe = new Recipe(r)
+      let recipeHtml = recipe.recipeLinkHtml()
+      $('div#userRecipes').append(recipeHtml)
+    });
+  });
+}
+
 const newReviewHtml = review => {
   if(review.comment) {
     return `
@@ -61,6 +84,8 @@ const newReviewHtml = review => {
 
 $(function() {
   $('button#getRecipes').click(getUserRecipes);
+
+  $('button#alphabetizedRecipes').click(alphabetizeUserRecipes);
 
   $(document).on('click', 'a#recipeLink', function(e) {
     e.preventDefault();
@@ -86,7 +111,8 @@ $(function() {
   $(document).on('submit', 'form#reviewForm', function(e){
     e.preventDefault();
     const reviewParams = $(this).serialize();
-    const postURL = $(this)[0]["action"]
+    const postURL = this.action
+    // const postURL = $(this)[0]["action"]
     $.post(postURL, reviewParams)
     .done(function(data) {
       $('div#newReview').html('<h5>Review Posted!</h5>');
