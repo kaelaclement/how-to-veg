@@ -5,11 +5,11 @@ class Recipe {
     this.ingredients = recipe.ingredients.split(', ');
     this.instructions = recipe.instructions;
     this.reviews = recipe.reviews.reverse();
-  };
+  }
   
   recipeLinkHtml() {
     return `<p><a id="recipeLink" data-recipe-id="${this.id}" href="/recipes/${this.id}">${this.title}</a></p>`;
-  };
+  }
   
   recipeShowHtml() {
     let recipeHtml = `
@@ -22,7 +22,7 @@ class Recipe {
     <p>${this.instructions}</p>
     `
     return recipeHtml;
-  };
+  }
 
   reviewsHtml() {
     $('h3#reviewsHeadline').html('Reviews')
@@ -35,8 +35,8 @@ class Recipe {
       }
     });
     return reviewsHtml;
-  };
-};
+  }
+}
 
 const getUserRecipes = () => {
   $('div#userRecipes').html('');
