@@ -1,21 +1,23 @@
-<h1><%= user_recipes %></h1>
+<h1><%= user_recipes unless !user_recipes %></h1>
+
+<%= form_tag(recipes_path, method: :get, class: "m-1") do %>
+  <input type="text" name="search" id="search" placeholder="Search by keyword...">
+  <%= submit_tag "Search", class: "btn-secondary" %>
+<% end %>
 
 <% if @button == "recent" %>
-  <p>Showing most popular.</p>
   <%= form_tag(recipes_path, method: :get) do %>
-    <%= submit_tag ("Order by most recent") %>
+    <%= submit_tag ("Order by most recent"), class: "m-1 btn-outline-secondary" %>
   <% end %>
+  <small class="m-1">Showing most popular.</small>
 <% elsif @button == "popular" %>
-  <p>Showing most recent.</p>
   <%= form_tag(recipes_path, method: :get) do %>
     <input type="hidden" name="order" value="popular">
-    <%= submit_tag ("Order by most popular") %>
+    <%= submit_tag ("Order by most popular"), class: "m-1 btn-outline-secondary" %>
   <% end %>
+  <small class="m-1">Showing most recent.</small>
 <% end %>
 
-<%= form_tag(recipes_path, method: :get) do %>
-  <%= text_field_tag "search" %>
-  <%= submit_tag "Search" %>
-<% end %>
-
-<%= render "recipes" %>
+<div class="ml-3 mt-3 text-justify-left">
+  <%= render "recipes" %>
+</div>
