@@ -14,15 +14,14 @@
       <h1>How To Veg</h1>
       <p>Easy, delicious, vegetarian.</p>
     </header>
-    <div class="navigation">
-      Go to:
-      <%= link_to "Recipes", recipes_url %>
+    <div class="nav">
+      <%= link_to "Recipes", recipes_url, class: "nav-link" %>
       <% if session[:user_id] %>
-        <%= link_to "Profile", user_url(current_user) %>
-        <%= link_to "Log Out", logout_url, method: "post" %>
+        <%= link_to "Profile", user_url(current_user), class: "nav-link" %>
+        <%= link_to "Log Out", logout_url, method: "post", class: "nav-link" %>
       <% else %>
-        <%= link_to "Sign Up", new_user_url %>
-        <%= link_to "Log In", login_url %>
+        <%= link_to "Sign Up", new_user_url, class: "nav-link" %>
+        <%= link_to "Log In", login_url, class: "nav-link" %>
       <% end %>
     </div>
     <%= yield %>
