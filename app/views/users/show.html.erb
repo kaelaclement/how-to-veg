@@ -1,8 +1,8 @@
-<h1><%= @user.name %></h1>
-
-<p><%= link_to "#{@user.name}'s recipes (#{@user.authored_recipes.count})", user_recipes_path(@user) %></p>
-<p><%= link_to "#{@user.name}'s liked recipes", "/users/#{@user.id}/liked_recipes" %>
+<h1 class="p-3"><%= @user.name %></h1>
 
 <% if @user == current_user %>
-  <p><%= link_to "Post new recipe", new_user_recipe_path(@user, Recipe.new) %></p>
+  <p class="p-3"><%= link_to "Post new recipe", new_user_recipe_path(@user, Recipe.new) %></p>
 <% end %>
+
+<p class="p-3"><%= link_to "#{@user.name}'s recipes (#{@user.authored_recipes.count})", user_recipes_path(@user) %></p>
+<p class="p-3"><%= link_to "#{@user.name}'s liked recipes", "/users/#{@user.id}/liked_recipes" %>
