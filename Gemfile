@@ -36,9 +36,17 @@ gem 'jbuilder', '~> 2.5'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
+# OmniAuth for Facebook login
 gem 'omniauth'
 gem 'omniauth-facebook'
+
+# .env for OmniAuth & Facebook login
 gem 'dotenv-rails'
+
+# bootstrap for rails
+gem 'bootstrap', '~> 4.0.0'
+
+gem 'jquery-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
