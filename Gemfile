@@ -59,8 +59,8 @@ group :development, :test do
   gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
 
+  # Replaces Rails fixtures for testing
   gem 'factory_bot_rails'
-  gem 'database_cleaner'
 end
 
 group :development do
@@ -77,6 +77,10 @@ group :test do
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'chromedriver-helper'
 
+  # Manage testing database
+  gem 'database_cleaner'
+
+  # Simple one-liners for testing basic functionality
   gem 'shoulda-matchers'
 end
 
