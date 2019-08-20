@@ -15,5 +15,6 @@ RSpec.describe User, type: :model do
     it { should have_many(:reviewed_recipes).through(:reviews).source(:recipe) }
   end
   
+  it { should have_secure_password }
 
 end
