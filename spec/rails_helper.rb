@@ -33,7 +33,7 @@ rescue ActiveRecord::PendingMigrationError => e
   exit 1
 end
 RSpec.configure do |config|
-  config.include FactoryGirl::Syntax::Methods
+  config.include FactoryBot::Syntax::Methods
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
@@ -45,11 +45,11 @@ RSpec.configure do |config|
   end
 
   config.before(:each) do
-    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.strategy= :transaction
   end
 
   config.before(:each, :js => true) do
-    DatabaseCleaner.strategy = :truncation
+    DatabaseCleaner.strategy= :truncation
   end
 
   config.before(:each) do
