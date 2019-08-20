@@ -8,4 +8,10 @@ RSpec.describe Recipe, type: :model do
     it { should validate_presence_of(:instructions) }
   end
 
+  describe 'associations' do
+    it { should belong_to(:author).class_name('User') }
+    it { should have_many(:reviews) }
+    it { should have_many(:users).through(:reviews) }
+  end
+
 end
