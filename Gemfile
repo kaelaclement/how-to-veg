@@ -54,10 +54,13 @@ group :development, :test do
 
   # Use rspec for testing
   gem 'rspec-rails', '~> 3.8'
-  
+
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
+
+  gem 'factory_girl_rails'
+  gem 'database_cleaner'
 end
 
 group :development do
